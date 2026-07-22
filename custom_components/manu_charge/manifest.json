@@ -1,0 +1,12 @@
+{
+  "domain": "manu_charge",
+  "name": "Manual Charge (KLR EMS)",
+  "codeowners": ["@klroman2025"],
+  "config_flow": true,
+  "documentation": "https://github.com/klr-ems-audit/manual_charge",
+  "integration_type": "service",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/klr-ems-audit/manual_charge/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
