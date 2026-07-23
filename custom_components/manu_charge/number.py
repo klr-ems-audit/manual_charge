@@ -54,7 +54,9 @@ class ManuChargeNumberBase(ManuChargeEntity, NumberEntity, RestoreEntity):
     async def async_set_native_value(self, value: float) -> None:
         """Zapis nowej wartości."""
         setattr(self._controller.state, self._key, value)
-        await self._controller.async_apply()
+        self.async_write_ha_state()
+        self._controller.notify_listeners()
+        self._controller.async_request_apply()
 
 
 class ManuChargeSoc(ManuChargeNumberBase):

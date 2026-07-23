@@ -62,4 +62,6 @@ class ManuChargeTime(ManuChargeEntity, TimeEntity, RestoreEntity):
     async def async_set_value(self, value: dt_time) -> None:
         """Zapis nowej godziny."""
         setattr(self._controller.state, self._key, value)
-        await self._controller.async_apply()
+        self.async_write_ha_state()
+        self._controller.notify_listeners()
+        self._controller.async_request_apply()

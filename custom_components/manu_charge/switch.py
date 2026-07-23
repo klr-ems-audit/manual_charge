@@ -57,12 +57,16 @@ class ManuChargeSwitch(ManuChargeEntity, SwitchEntity, RestoreEntity):
     async def async_turn_on(self, **kwargs: Any) -> None:
         """Włączenie."""
         setattr(self._controller.state, self._key, True)
-        await self._controller.async_apply()
+        self.async_write_ha_state()
+        self._controller.notify_listeners()
+        self._controller.async_request_apply()
 
     async def async_turn_off(self, **kwargs: Any) -> None:
         """Wyłączenie."""
         setattr(self._controller.state, self._key, False)
-        await self._controller.async_apply()
+        self.async_write_ha_state()
+        self._controller.notify_listeners()
+        self._controller.async_request_apply()
 
 
 class ManuChargeForceSwitch(ManuChargeSwitch):

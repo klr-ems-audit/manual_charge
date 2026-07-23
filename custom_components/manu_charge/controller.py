@@ -105,6 +105,11 @@ class ManuChargeController:
         return _remove
 
     @callback
+    def async_request_apply(self) -> None:
+        """Zleca uzgodnienie w tle — NIE blokuje interfejsu."""
+        self.hass.async_create_task(self.async_apply())
+
+    @callback
     def notify_listeners(self) -> None:
         """Odświeża wszystkie encje modułu."""
         for listener in self._listeners:
@@ -193,12 +198,15 @@ class ManuChargeController:
     async def _async_set_current(self, value: float) -> None:
         """Ustawia prąd ładowania na falowniku."""
         _LOGGER.debug("Ustawiam %s = %s A", self._charge_entity, int(value))
-        await self.hass.services.async_call(
-            "number",
-            "set_value",
-            {ATTR_ENTITY_ID: self._charge_entity, "value": int(value)},
-            blocking=True,
-        )
+        try:
+            await self.hass.services.async_call(
+                "number",
+                "set_value",
+                {ATTR_ENTITY_ID: self._charge_entity, "value": int(value)},
+                blocking=True,
+            )
+        except Exception:  # noqa: BLE001
+            _LOGGER.exception("Nie udalo sie ustawic %s", self._charge_entity)
 
     async def _async_announce(
         self, blocking: bool, previous: float, target: float
