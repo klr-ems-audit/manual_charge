@@ -7,7 +7,7 @@ from typing import Final
 
 DOMAIN: Final = "manu_charge"
 NAME: Final = "Manual Charge"
-VERSION: Final = "0.1.1"
+VERSION: Final = "0.1.2"
 MANUFACTURER: Final = "KLR EMS"
 
 PLATFORMS: Final[list[str]] = ["binary_sensor", "number", "switch", "time"]
