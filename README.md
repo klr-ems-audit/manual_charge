@@ -6,9 +6,7 @@ w falownikach Deye. Część ekosystemu **KLR EMS Audit System**.
 
 > ⚠️ Wersja wczesna (0.1.x) — interfejs może ulec zmianie.
 
-![Karta dashboardu](https://raw.githubusercontent.com/klr-ems-audit/manual_charge/main/images/daschboard_manu_charge.png
-
-)
+![Karta dashboardu](https://raw.githubusercontent.com/klr-ems-audit/manual_charge/main/images/daschboard_manu_charge.png)
 
 ## Do czego służy
 
