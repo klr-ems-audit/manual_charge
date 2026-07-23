@@ -1,0 +1,50 @@
+# Karta sterowania modułem Manual Charge.
+# Skopiuj całość i wklej w edytorze dashboardu:
+#   Dashboard → Edytuj → Dodaj kartę → Ręcznie
+type: entities
+title: Blokada ładowania magazynu
+show_header_toggle: false
+state_color: true
+entities:
+  - entity: binary_sensor.manu_charge_blocking_active
+    name: Stan blokady
+
+  - type: section
+    label: Sterowanie ręczne
+
+  - entity: switch.manu_charge_force_now
+    name: Zablokuj natychmiast
+  - entity: switch.manu_charge_master_switch
+    name: Harmonogram aktywny
+
+  - type: section
+    label: Termin 1
+
+  - entity: switch.manu_charge_range1_enable
+    name: Aktywny
+  - entity: time.manu_charge_range1_on
+    name: Od godziny
+  - entity: time.manu_charge_range1_off
+    name: Do godziny
+  - entity: number.manu_charge_range1_soc
+    name: Blokuj powyżej SOC
+
+  - type: section
+    label: Termin 2
+
+  - entity: switch.manu_charge_range2_enable
+    name: Aktywny
+  - entity: time.manu_charge_range2_on
+    name: Od godziny
+  - entity: time.manu_charge_range2_off
+    name: Do godziny
+  - entity: number.manu_charge_range2_soc
+    name: Blokuj powyżej SOC
+
+  - type: section
+    label: Prądy ładowania
+
+  - entity: number.manu_charge_preset_current
+    name: Prąd powrotu
+  - entity: number.manu_charge_saved_current
+    name: Zapamiętany prąd

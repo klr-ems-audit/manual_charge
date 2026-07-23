@@ -21,3 +21,28 @@ i zrestartuj Home Assistant.
 ## Licencja
 
 MIT — patrz [LICENSE](LICENSE).
+
+## Karta dashboardu
+
+W repozytorium znajduje się gotowa karta: [`dashboard_card.yaml`](dashboard_card.yaml).
+
+Dashboard → Edytuj → Dodaj kartę → **Ręcznie** → wklej zawartość pliku.
+
+## Jak działa blokada
+
+Moduł ustawia prąd ładowania magazynu na **0 A**, gdy spełniony jest
+którykolwiek z warunków:
+
+- włączono **Zablokuj natychmiast**, albo
+- **Harmonogram aktywny** jest włączony, a bieżący czas mieści się
+  w aktywnym terminie **i** naładowanie magazynu przekracza próg SOC tego terminu.
+
+Przed wyzerowaniem moduł zapamiętuje bieżący prąd ładowania i przywraca go
+po ustaniu blokady. Jeśli nie ma zapamiętanej wartości, używa **prądu powrotu**.
+
+Stan jest uzgadniany co minutę, po starcie Home Assistant oraz po powrocie
+falownika do dostępności — zgubiona zmiana stanu nie zostawi falownika
+w niewłaściwym trybie.
+
+> **Uwaga:** „Zablokuj natychmiast" celowo wyłącza się po restarcie
+> Home Assistant (samorozbrojenie). Pozostałe ustawienia są odtwarzane.

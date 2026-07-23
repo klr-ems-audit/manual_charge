@@ -1,0 +1,53 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Manual Charge",
+        "description": "Wskaż encje swojego falownika.",
+        "data": {
+          "charge_current_entity": "Encja maksymalnego prądu ładowania",
+          "battery_soc_entity": "Sensor naładowania magazynu (SOC)",
+          "notifications": "Powiadomienia systemowe"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "Moduł jest już skonfigurowany."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Manual Charge",
+        "data": {
+          "charge_current_entity": "Encja maksymalnego prądu ładowania",
+          "battery_soc_entity": "Sensor naładowania magazynu (SOC)",
+          "notifications": "Powiadomienia systemowe"
+        }
+      }
+    }
+  },
+  "entity": {
+    "switch": {
+      "master_switch": { "name": "Główny wyłącznik harmonogramu" },
+      "force_now": { "name": "Wymuś blokadę teraz" },
+      "range1_enable": { "name": "Aktywuj termin 1" },
+      "range2_enable": { "name": "Aktywuj termin 2" }
+    },
+    "number": {
+      "range1_soc": { "name": "Min SOC dla blokady 1" },
+      "range2_soc": { "name": "Min SOC dla blokady 2" },
+      "preset_current": { "name": "Prąd powrotu (preset)" },
+      "saved_current": { "name": "Zapisany prąd ładowania" }
+    },
+    "time": {
+      "range1_on": { "name": "Start zakresu 1" },
+      "range1_off": { "name": "Koniec zakresu 1" },
+      "range2_on": { "name": "Start zakresu 2" },
+      "range2_off": { "name": "Koniec zakresu 2" }
+    },
+    "binary_sensor": {
+      "blocking_active": { "name": "Blokada aktywna" }
+    }
+  }
+}

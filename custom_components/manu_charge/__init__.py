@@ -8,17 +8,18 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 
 from .const import DOMAIN, PLATFORMS
+from .controller import ManuChargeController
 
 _LOGGER = logging.getLogger(__name__)
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Konfiguracja wpisu."""
-    hass.data.setdefault(DOMAIN, {})
-    hass.data[DOMAIN][entry.entry_id] = {}
+    controller = ManuChargeController(hass, entry)
+    hass.data.setdefault(DOMAIN, {})[entry.entry_id] = controller
 
-    if PLATFORMS:
-        await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+    await controller.async_setup()
 
     entry.async_on_unload(entry.add_update_listener(async_reload_entry))
     return True
@@ -26,16 +27,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Usunięcie wpisu."""
-    unloaded = True
-    if PLATFORMS:
-        unloaded = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
-
+    unloaded = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
     if unloaded:
         hass.data[DOMAIN].pop(entry.entry_id, None)
-
     return unloaded
 
 
 async def async_reload_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
-    """Przeładowanie wpisu."""
+    """Przeładowanie po zmianie opcji."""
     await hass.config_entries.async_reload(entry.entry_id)
